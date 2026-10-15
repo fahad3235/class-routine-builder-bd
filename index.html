@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Class Routine Builder BD</title>
+<meta name="description" content="Offline bilingual weekly class routine builder for Bangladeshi students (Saturday to Thursday).">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top no-print">
+    <div>
+      <h1 id="appTitle">Class Routine Builder</h1>
+      <p id="appSubtitle">Weekly class routine for Bangladeshi students (Saturday - Thursday). Works fully offline.</p>
+      <div class="stats"><span><strong id="statCourses">0</strong> <span id="statCoursesLabel">Courses</span></span><span><strong id="statClasses">0</strong> <span id="statClassesLabel">Classes</span></span></div>
+    </div>
+    <div class="top-actions">
+      <button type="button" id="langBtn" class="secondary" aria-label="Switch language">BN</button>
+      <button type="button" id="printBtn">Print routine</button>
+    </div>
+  </header>
+
+  <h1 class="print-title" id="printTitle">Class Routine Builder - Weekly Routine</h1>
+
+  <section class="card no-print" aria-labelledby="nowTitle">
+    <h2 id="nowTitle">Now &amp; Next</h2>
+    <div class="nownext">
+      <div class="nn-box"><div class="kicker" id="nowKicker">Now</div><div class="big" id="nowLine">-</div><div class="sub" id="nowSub"></div></div>
+      <div class="nn-box"><div class="kicker" id="nextKicker">Next</div><div class="big" id="nextLine">-</div><div class="sub" id="nextSub"></div></div>
+    </div>
+    <div id="asofBadge" class="badge" hidden></div>
+  </section>
+
+  <section class="card no-print" aria-labelledby="coursesTitle">
+    <h2 id="coursesTitle">Courses</h2>
+    <form id="courseForm" class="grid-form" novalidate>
+      <div><label for="courseCode" id="courseCodeLabel">Course code</label><input id="courseCode" type="text" maxlength="12" autocomplete="off" placeholder="CIS131"><div class="hint" id="courseCodeHint">e.g. CIS131 (2-12 chars)</div></div>
+      <div><label for="courseName" id="courseNameLabel">Course name</label><input id="courseName" type="text" maxlength="80" autocomplete="off" placeholder="Data Structures"></div>
+      <div><label for="courseTeacher" id="courseTeacherLabel">Teacher (optional)</label><input id="courseTeacher" type="text" maxlength="60" autocomplete="off"></div>
+      <div><label for="courseRoom" id="courseRoomLabel">Room (optional)</label><input id="courseRoom" type="text" maxlength="60" autocomplete="off" placeholder="AB-204"></div>
+      <div><label for="courseColor" id="courseColorLabel">Color</label><select id="courseColor"></select></div>
+      <div><button type="submit" id="courseSubmit">Add course</button> <button type="button" id="courseCancel" class="secondary" hidden>Cancel</button></div>
+    </form>
+    <p class="error" id="courseError" role="alert"></p>
+    <p class="success" id="courseMsg" role="status"></p>
+    <ul class="list" id="courseList"></ul>
+    <p class="hint" id="noCourses">No courses yet. Add your first course above.</p>
+  </section>
+
+  <section class="card no-print" aria-labelledby="classesTitle">
+    <h2 id="classesTitle">Classes</h2>
+    <form id="classForm" class="grid-form" novalidate>
+      <div><label for="classCourse" id="classCourseLabel">Course</label><select id="classCourse"></select></div>
+      <div><label for="classDay" id="classDayLabel">Day</label><select id="classDay"></select></div>
+      <div><label for="classStart" id="classStartLabel">Start time</label><input id="classStart" type="time" min="07:00" max="21:00" value="09:00"></div>
+      <div><label for="classEnd" id="classEndLabel">End time</label><input id="classEnd" type="time" min="07:00" max="21:00" value="10:30"></div>
+      <div><button type="submit" id="classSubmit">Add class</button> <button type="button" id="classCancel" class="secondary" hidden>Cancel</button></div>
+    </form>
+    <p class="error" id="classError" role="alert"></p>
+    <p class="success" id="classMsg" role="status"></p>
+    <p class="hint" id="noClasses">No classes yet. Add your first class above.</p>
+    <div id="classList"></div>
+  </section>
+
+  <section class="card" id="gridCard" aria-labelledby="gridTitle">
+    <h2 id="gridTitle">Weekly Grid</h2>
+    <p class="hint no-print" id="gridHint">Click a class block to delete it.</p>
+    <p class="hint" id="gridEmpty">No classes scheduled yet. Your weekly grid will appear here once you add a class.</p>
+    <div class="grid-wrap"><div class="grid" id="grid">
+      <div class="grid-head" id="gridHead"></div>
+      <div class="grid-body" id="gridBody"></div>
+    </div></div>
+  </section>
+
+  <section class="card no-print" aria-labelledby="dataTitle">
+    <h2 id="dataTitle">Data</h2>
+    <div class="data-row">
+      <button type="button" id="exportBtn">Export JSON</button>
+      <label for="importFile" id="importLabel">Choose a JSON file to import</label>
+      <input id="importFile" type="file" accept=".json,application/json" style="width:auto">
+    </div>
+    <p class="error" id="dataError" role="alert"></p>
+    <p class="success" id="dataMsg" role="status"></p>
+    <h3 id="eraseTitle">Erase all data</h3>
+    <p class="hint" id="eraseHint">Type DELETE below, then press Erase. This cannot be undone.</p>
+    <div class="erase-row">
+      <input id="eraseInput" type="text" autocomplete="off" placeholder="Type DELETE">
+      <button type="button" id="eraseBtn" class="danger">Erase all data</button>
+    </div>
+    <p class="error" id="eraseError" role="alert"></p>
+  </section>
+
+  <footer class="no-print" id="footerText">Personal planning tool. Not an official university routine. All data stays in your browser.</footer>
+</div>
+<script src="js/logic.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
